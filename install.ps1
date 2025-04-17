@@ -86,7 +86,23 @@ function Test-CondaInstallation {
     $condaExists = Get-Command "conda" -ErrorAction SilentlyContinue
     if ($condaExists) {
         Write-LogMessage "Conda is already available in PATH" -Level "SUCCESS" -Color $colors.Success
-        return $true
+        
+        # Get the actual path to conda command
+        $condaPath = $condaExists.Source
+        
+        # Extract the base Conda path
+        if ($condaPath -like "*Library\bin\conda.bat") {
+            # If conda is a .bat file in Library\bin, go three directories up
+            $condaBasePath = Split-Path -Parent (Split-Path -Parent (Split-Path -Parent $condaPath))
+            Write-LogMessage "Conda command is a .bat file, adjusting base path calculation" -Level "INFO" -Color $colors.Info
+        } else {
+            # If conda is an .exe file in Scripts, go two directories up
+            $condaBasePath = Split-Path -Parent (Split-Path -Parent $condaPath)
+        }
+        
+        Write-LogMessage "Found Conda base path: $condaBasePath" -Level "SUCCESS" -Color $colors.Success
+        $global:CondaBasePath = $condaBasePath
+        return $condaBasePath
     }
     
     # Check standard Miniconda paths
@@ -223,21 +239,29 @@ function Create-CondaProfile {
     Write-LogMessage "Creating PowerShell profile for Conda..." -Level "INFO" -Color $colors.Info
     
     try {
+        # Check if $PROFILE is empty and use a default path if needed
+        $profilePath = $PROFILE
+        if ([string]::IsNullOrEmpty($profilePath)) {
+            Write-LogMessage "$PROFILE is empty, using default profile path" -Level "WARNING" -Color $colors.Warning
+            $profilePath = "$env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1"
+            Write-LogMessage "Using default profile path: $profilePath" -Level "INFO" -Color $colors.Info
+        }
+        
         # Check if profile exists
-        if (-not (Test-Path $PROFILE)) {
+        if (-not (Test-Path $profilePath)) {
             # Create profile directory if it doesn't exist
-            $profileDir = Split-Path -Parent $PROFILE
+            $profileDir = Split-Path -Parent $profilePath
             if (-not (Test-Path $profileDir)) {
                 New-Item -Path $profileDir -ItemType Directory -Force | Out-Null
             }
             
             # Create empty profile
-            New-Item -Path $PROFILE -ItemType File -Force | Out-Null
-            Write-LogMessage "Created PowerShell profile at: $PROFILE" -Level "SUCCESS" -Color $colors.Success
+            New-Item -Path $profilePath -ItemType File -Force | Out-Null
+            Write-LogMessage "Created PowerShell profile at: $profilePath" -Level "SUCCESS" -Color $colors.Success
         }
         
         # Check if profile already contains conda initialization
-        $profileContent = Get-Content -Path $PROFILE -Raw -ErrorAction SilentlyContinue
+        $profileContent = Get-Content -Path $profilePath -Raw -ErrorAction SilentlyContinue
         if ($profileContent -and $profileContent -match "conda initialize") {
             Write-LogMessage "PowerShell profile already contains conda initialization" -Level "INFO" -Color $colors.Info
             return $true
@@ -281,7 +305,7 @@ If (Test-Path `$Env:CONDA_EXE) {
 
 "@
         
-        Add-Content -Path $PROFILE -Value $condaInit
+        Add-Content -Path $profilePath -Value $condaInit
         Write-LogMessage "Added conda initialization to PowerShell profile" -Level "SUCCESS" -Color $colors.Success
         return $true
     } catch {

@@ -47,3 +47,60 @@
 [2025-04-17 15:43:14] INFO : Project structure successfully set up
 [2025-04-17 15:43:14] INFO : Creating Conda environment 'autotag'...
 [2025-04-17 15:43:15] INFO : Creating environment from environment.yml...
+[2025-04-17 15:47:49] ERROR : Error creating Conda environment
+[2025-04-17 15:47:49] INFO : Installing dependencies...
+[2025-04-17 15:47:50] INFO : Installing all dependencies (this may take a while)...
+[2025-04-17 15:47:51] ERROR : Error installing dependencies
+[2025-04-17 15:47:51] INFO : Shortcut created: C:\Users\esca-\Desktop\AUTO-TAG.lnk
+[2025-04-17 15:47:51] INFO : Shortcut created: C:\Users\esca-\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\AUTO-TAG\AUTO-TAG.lnk
+[2025-04-17 15:47:51] INFO : AUTO-TAG installation completed in Development Mode!
+[2025-04-17 15:47:51] INFO : Start AUTO-TAG using the desktop shortcut or with .\start.ps1
+[2025-04-17 15:49:18] INFO : Running with Administrator rights
+[2025-04-17 15:49:18] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 15:49:18] INFO : Installing in Development Mode
+[2025-04-17 15:49:18] INFO : Checking Conda installation...
+[2025-04-17 15:49:18] SUCCESS : Conda is already available in PATH
+[2025-04-17 15:49:18] INFO : Conda already installed at: True
+[2025-04-17 15:49:18] INFO : Fixing Conda PATH...
+[2025-04-17 15:49:20] SUCCESS : Added Conda to PATH
+[2025-04-17 15:49:23] SUCCESS : Added Conda Scripts to PATH
+[2025-04-17 15:49:23] INFO : Initializing Conda...
+[2025-04-17 15:49:23] ERROR : Error initializing Conda: The module 'True' could not be loaded. For more information, run 'Import-Module True'.
+[2025-04-17 15:49:23] INFO : Trying to create a manual Conda profile...
+[2025-04-17 15:49:23] INFO : Creating PowerShell profile for Conda...
+[2025-04-17 15:49:23] SUCCESS : Created PowerShell profile at: C:\Users\esca-\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+[2025-04-17 15:49:23] SUCCESS : Added conda initialization to PowerShell profile
+[2025-04-17 15:49:23] SUCCESS : Manual Conda profile created successfully
+[2025-04-17 15:49:23] INFO : Setting up project structure...
+[2025-04-17 15:49:23] INFO : Project structure successfully set up
+[2025-04-17 15:49:23] INFO : Creating Conda environment 'autotag'...
+[2025-04-17 15:51:44] WARNING : This installation should be run as Administrator.
+[2025-04-17 15:52:04] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 15:52:04] INFO : Installing in Development Mode
+[2025-04-17 15:52:04] INFO : Checking Conda installation...
+[2025-04-17 15:52:04] SUCCESS : Conda is already available in PATH
+[2025-04-17 15:54:59] WARNING : This installation should be run as Administrator.
+[2025-04-17 15:55:02] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 15:55:02] INFO : Installing in Development Mode
+[2025-04-17 15:55:02] INFO : Checking Conda installation...
+[2025-04-17 15:55:02] SUCCESS : Conda is already available in PATH
+[2025-04-17 15:58:25] WARNING : This installation should be run as Administrator.
+[2025-04-17 15:58:30] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 15:58:30] INFO : Installing in Development Mode
+[2025-04-17 15:58:30] INFO : Checking Conda installation...
+[2025-04-17 15:58:30] SUCCESS : Conda is already available in PATH
+[2025-04-17 16:00:15] WARNING : This installation should be run as Administrator.
+[2025-04-17 16:00:26] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 16:00:26] INFO : Installing in Development Mode
+[2025-04-17 16:00:26] INFO : Checking Conda installation...
+[2025-04-17 16:00:26] SUCCESS : Conda is already available in PATH
+[2025-04-17 16:04:18] WARNING : This installation should be run as Administrator.
+[2025-04-17 16:04:26] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 16:04:27] INFO : Installing in Development Mode
+[2025-04-17 16:04:27] INFO : Checking Conda installation...
+[2025-04-17 16:04:27] SUCCESS : Conda is already available in PATH
+[2025-04-17 16:06:52] WARNING : This installation should be run as Administrator.
+[2025-04-17 16:06:56] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 16:06:56] INFO : Installing in Development Mode
+[2025-04-17 16:06:56] INFO : Checking Conda installation...
+[2025-04-17 16:06:56] SUCCESS : Conda is already available in PATH

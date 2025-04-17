@@ -1,0 +1,31 @@
+# AUTO-TAG Icon Placeholder
+
+This file is a placeholder for the AUTO-TAG application icon. To use a proper icon:
+
+1. Create or obtain an .ico file (Windows icon format)
+2. Rename it to `icon.ico` and place it in this directory (resources/)
+3. The icon will be used for:
+   - Desktop shortcuts
+   - Start Menu entries
+   - The application executable when packaged with PyInstaller
+   - The Windows Control Panel uninstall entry
+
+## Creating an Icon
+
+You can create an icon using:
+- Adobe Photoshop
+- GIMP
+- Online icon generators
+- Icon editors like IcoFX
+
+Recommended specifications:
+- Include multiple sizes: 16x16, 32x32, 48x48, 64x64, 128x128, 256x256
+- Use transparent background
+- Save in .ico format
+
+## Example Icon Design
+
+Consider an icon that represents the AUTO-TAG concept:
+- A camera or image with tag labels
+- AI-related imagery combined with photo elements
+- Simple, recognizable design that works at small sizes

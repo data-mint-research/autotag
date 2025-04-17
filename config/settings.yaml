@@ -1,0 +1,68 @@
+# AUTO-TAG Configuration
+
+# Paths
+paths:
+  input_folder: "./data/input"
+  output_folder: "./data/output"
+  models_dir: "./models"
+
+# Tag Settings
+tagging:
+  mode: "append"  # Options: append, overwrite
+  min_confidence_percent: 80
+  min_face_size: 40
+  min_person_height: 40
+
+# Hardware Settings
+hardware:
+  use_gpu: true
+  cuda_device_id: 0  # -1 for CPU, 0+ for specific GPU
+  num_workers: 4
+  batch_size: 0  # 0 for auto-detection based on GPU memory
+  gpu:
+    mixed_precision: true  # Enable mixed precision (FP16/BF16)
+    tensor_cores: true     # Enable tensor cores for RTX GPUs
+    num_streams: 4         # Number of CUDA streams for parallel operations
+    memory_fraction: 0.8   # Fraction of GPU memory to use (0.0-1.0)
+    multi_gpu: false       # Enable multi-GPU processing
+
+# Model Settings
+models:
+  auto_download: true
+  force_update: false
+  offline_mode: false
+
+# Processing Options
+processing:
+  subdirectories: true
+  max_recursion_depth: 0  # 0 means no limit
+  checkpointing:
+    enabled: true
+    interval_minutes: 5
+    auto_resume: true
+  batch:
+    dynamic_sizing: true   # Dynamically adjust batch size based on GPU memory
+    progress_tracking: true
+    eta_estimation: true
+
+# MinIO Settings (optional)
+minio:
+  enabled: false
+  endpoint: "localhost:9000"
+  access_key: "minioadmin"
+  secret_key: "minioadmin"
+  secure: false
+  input_bucket: "images"
+  output_bucket: "tagged-images"
+
+# Online Identity Recognition (optional)
+online_identity:
+  enabled: false
+  service: "open_face"  # Options: open_face, pimeyes
+  api_key: ""
+
+# Logging
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  max_size_mb: 10
+  backup_count: 3

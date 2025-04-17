@@ -1,0 +1,9 @@
+[2025-04-17 14:28:55] WARNING : This installation should be run as Administrator.
+[2025-04-17 14:29:37] INFO : GPU detected: NVIDIA GeForce RTX 5090, 32607 MiB
+[2025-04-17 14:29:37] INFO : Installing in Development Mode
+[2025-04-17 14:29:37] INFO : Miniconda not found, installing...
+[2025-04-17 14:29:44] INFO : Installing Miniconda...
+[2025-04-17 14:30:37] INFO : Miniconda successfully installed
+[2025-04-17 14:30:37] INFO : Initializing Conda...
+[2025-04-17 14:30:37] ERROR : Error initializing Conda: Die Benennung "C:\Users\esca-\miniconda3\Scripts\conda.exe" wurde nicht als Name eines Cmdlet, einer Funktion, einer Skriptdatei oder eines ausführbaren Programms erkannt. Überprüfen Sie die Schreibweise des Namens, oder ob der Pfad korrekt ist (sofern enthalten), und wiederholen Sie den Vorgang.
+[2025-04-17 14:30:37] ERROR : Error initializing Conda, installation aborted

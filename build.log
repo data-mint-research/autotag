@@ -1,0 +1,16 @@
+2025-04-17 15:34:16,648 - INFO - Starting AUTO-TAG build process
+2025-04-17 15:34:16,649 - INFO - Setting up build environment
+2025-04-17 15:34:16,719 - INFO - PyInstaller version: 6.13.0
+2025-04-17 15:34:16,719 - INFO - Downloading and extracting ExifTool
+2025-04-17 15:34:17,575 - ERROR - Error downloading ExifTool: Command '['C:\\Program Files\\Python310\\python.exe', 'resources/download_exiftool.py', '--output-dir', 'resources']' returned non-zero exit status 1.
+2025-04-17 15:34:17,576 - ERROR - Stdout: 
+2025-04-17 15:34:17,576 - ERROR - Stderr: 2025-04-17 15:34:16,961 - INFO - Output directory: C:\Users\esca-\Documents\GitHub\autotag\resources
+2025-04-17 15:34:16,973 - INFO - Downloading https://exiftool.org/exiftool-12.70.zip to C:\Users\esca-\AppData\Local\Temp\tmp_r1qwbdx.zip
+2025-04-17 15:34:17,561 - ERROR - Error downloading https://exiftool.org/exiftool-12.70.zip: 404 Client Error: Not Found for url: https://exiftool.org/exiftool-12.70.zip
+2025-04-17 15:34:17,561 - INFO - ExifTool extraction results:
+2025-04-17 15:34:17,561 - INFO -   windows: Not extracted
+2025-04-17 15:34:17,561 - INFO -   macos: Not extracted
+2025-04-17 15:34:17,561 - INFO -   linux: Not extracted
+2025-04-17 15:34:17,561 - ERROR - Failed to extract ExifTool for any platform
+
+2025-04-17 15:34:17,576 - ERROR - Failed to download ExifTool

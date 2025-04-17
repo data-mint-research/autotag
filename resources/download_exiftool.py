@@ -28,9 +28,62 @@ logging.basicConfig(
 )
 logger = logging.getLogger('exiftool-downloader')
 
-# ExifTool download URLs
-EXIFTOOL_WINDOWS_URL = "https://exiftool.org/exiftool-12.70.zip"
-EXIFTOOL_UNIX_URL = "https://exiftool.org/Image-ExifTool-12.70.tar.gz"
+# ExifTool version and download URLs
+EXIFTOOL_VERSION = "13.27"  # Current version as of April 8, 2025
+EXIFTOOL_BASE_URL = "https://exiftool.org"
+
+# URL templates for different platforms
+EXIFTOOL_WINDOWS_32_TEMPLATE = f"{EXIFTOOL_BASE_URL}/exiftool-{EXIFTOOL_VERSION}_32.zip"
+EXIFTOOL_WINDOWS_64_TEMPLATE = f"{EXIFTOOL_BASE_URL}/exiftool-{EXIFTOOL_VERSION}_64.zip"
+EXIFTOOL_UNIX_TEMPLATE = f"{EXIFTOOL_BASE_URL}/Image-ExifTool-{EXIFTOOL_VERSION}.tar.gz"
+
+# Function to get the latest version from the website (for future implementation)
+def get_latest_exiftool_version():
+    """
+    Attempt to fetch the latest ExifTool version from the website.
+    Returns the version string or None if it fails.
+    """
+    try:
+        import re
+        response = requests.get(f"{EXIFTOOL_BASE_URL}")
+        if response.status_code == 200:
+            # Look for version pattern in the page content
+            match = re.search(r'Download Version (\d+\.\d+)', response.text)
+            if match:
+                return match.group(1)
+    except Exception as e:
+        logger.warning(f"Failed to fetch latest ExifTool version: {e}")
+    return None
+
+# Try to get the latest version, fall back to hardcoded version if it fails
+def get_exiftool_version():
+    """Get the ExifTool version to use, with fallback to hardcoded version."""
+    latest_version = get_latest_exiftool_version()
+    if latest_version:
+        logger.info(f"Using latest ExifTool version: {latest_version}")
+        return latest_version
+    logger.info(f"Using hardcoded ExifTool version: {EXIFTOOL_VERSION}")
+    return EXIFTOOL_VERSION
+
+# Generate URLs based on version and system architecture
+def get_exiftool_urls(version=None):
+    """
+    Generate ExifTool download URLs for the specified version.
+    
+    Args:
+        version: ExifTool version to use. If None, uses the latest or hardcoded version.
+        
+    Returns:
+        Dictionary with URLs for different platforms
+    """
+    if version is None:
+        version = get_exiftool_version()
+    
+    return {
+        "windows_32": f"{EXIFTOOL_BASE_URL}/exiftool-{version}_32.zip",
+        "windows_64": f"{EXIFTOOL_BASE_URL}/exiftool-{version}_64.zip",
+        "unix": f"{EXIFTOOL_BASE_URL}/Image-ExifTool-{version}.tar.gz"
+    }
 
 def download_file(url: str, output_path: str) -> bool:
     """
@@ -173,19 +226,32 @@ def download_and_extract_exiftool(output_dir: str) -> Dict[str, Optional[str]]:
     
     system = platform.system()
     
+    # Get URLs for the current version
+    urls = get_exiftool_urls()
+    
     # Download and extract for Windows
     if system == "Windows":
+        # Determine if we're on 32-bit or 64-bit Windows
+        is_64bit = platform.machine().endswith('64')
+        windows_url = urls["windows_64"] if is_64bit else urls["windows_32"]
+        
         with tempfile.NamedTemporaryFile(suffix=".zip", delete=False) as temp_file:
             temp_file.close()
-            if download_file(EXIFTOOL_WINDOWS_URL, temp_file.name):
+            if download_file(windows_url, temp_file.name):
                 results["windows"] = extract_windows_exiftool(temp_file.name, output_dir)
+            else:
+                # Fallback: try the other bit version if the first one fails
+                fallback_url = urls["windows_32"] if is_64bit else urls["windows_64"]
+                logger.info(f"Trying fallback URL: {fallback_url}")
+                if download_file(fallback_url, temp_file.name):
+                    results["windows"] = extract_windows_exiftool(temp_file.name, output_dir)
             os.unlink(temp_file.name)
     
     # Download and extract for Unix (macOS/Linux)
     else:
         with tempfile.NamedTemporaryFile(suffix=".tar.gz", delete=False) as temp_file:
             temp_file.close()
-            if download_file(EXIFTOOL_UNIX_URL, temp_file.name):
+            if download_file(urls["unix"], temp_file.name):
                 if system == "Darwin":  # macOS
                     results["macos"] = extract_unix_exiftool(temp_file.name, output_dir)
                 else:  # Linux
